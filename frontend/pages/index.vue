@@ -1,18 +1,9 @@
 <template>
-  <div>
-    <div>
-      Resolved:
-      <div v-for="error in resolved" :key="error.index">`{{ error.code }}` - {{ error.text }}</div>
-    </div>
-    <div>
-      Unresolved:
-      <div v-for="error in unresolved" :key="error.index">`{{ error.code }}` - {{ error.text }}</div>
-    </div>
-    <div>
-      Backlog:
-      <div v-for="error in backlog" :key="error.index">`{{ error.code }}` - {{ error.text }}</div>
-    </div>
-  </div>
+  <ContentContainer>
+    <ErrorGroup :name="'Unresolved'" :colour="'red'" :data="unresolved" />
+    <ErrorGroup :name="'Resolved'" :colour="'green'" :data="resolved" />
+    <ErrorGroup :name="'Backlog'" :colour="'yellow'" :data="unresolved" />
+  </ContentContainer>
 </template>
 
 <script>
@@ -22,11 +13,7 @@ export default {
       const { resolved, unresolved, backlog } = await $axios.$get(
         "http://localhost:8000/get_lists"
       );
-      return {
-        resolved,
-        unresolved,
-        backlog
-      };
+      return { resolved, unresolved, backlog };
     } catch (error) {
       console.log(
         `Couldn't get error lists:\n${error}\nDid you start the API?`
@@ -38,8 +25,8 @@ export default {
   },
   data() {
     return {
-      resolved: [],
       unresolved: [],
+      resolved: [],
       backlog: []
     };
   }
