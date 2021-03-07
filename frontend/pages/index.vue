@@ -6,7 +6,12 @@
       :action="buttonAction('Resolve', unresolved, resolved)"
       :data="unresolved"
     />
-    <ErrorGroup :name="'Resolved'" :colour="'green'" :data="resolved" />
+    <ErrorGroup
+      :name="'Resolved'"
+      :colour="'green'"
+      :action="buttonAction('Unresolve', resolved, unresolved)"
+      :data="resolved"
+    />
     <ErrorGroup
       :name="'Backlog'"
       :colour="'yellow'"
