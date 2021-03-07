@@ -58,10 +58,5 @@ export default {
       actionHistory
     };
   }
-  // watch: {
-  //   isDisabled: function() {
-  //     return actionHistory.length === 0;
-  //   }
-  // }
 };
 </script>
