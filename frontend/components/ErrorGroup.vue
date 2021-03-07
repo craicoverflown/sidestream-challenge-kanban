@@ -1,13 +1,14 @@
 <template>
-  <div class="bg-gray-400 grid grid-cols-1 gap-2 rounded p-2 flex-1">
+  <div class="bg-gray-400 flex flex-col rounded p-2">
     <h2 class="text-lg font-bold text-black mb-0.5">{{ name }}</h2>
 
-    <CardList class="overflow-y-scroll">
+    <CardList>
       <Card
         v-bind:class="'bg-' + colour + '-300 rounded p-2'"
         v-for="error in data"
         :key="error.index"
         :error="error"
+        :action="action"
       />
     </CardList>
   </div>
@@ -15,6 +16,6 @@
 
 <script>
 export default {
-  props: ["name", "colour", "data"]
+  props: ["name", "action", "colour", "data"]
 };
 </script>
