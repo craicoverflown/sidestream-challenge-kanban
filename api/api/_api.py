@@ -81,7 +81,6 @@ def get_list_intersection_counts() -> Dict[str, int]:
     error_lists = _generate_lists()
     resolved, unresolved, backlog = error_lists['resolved'], error_lists['unresolved'], error_lists['backlog']
 
-    set({error['code'] for error in resolved})
     return  {
         'resolved_unresolved': len(intersect_error_lists(resolved, unresolved)),
         'resolved_backlog': len(intersect_error_lists(resolved, backlog)),
