@@ -12,7 +12,12 @@
       :action="buttonAction('Unresolve', resolved, unresolved)"
       :data="resolved"
     />
-    <ErrorGroup :name="'Backlog'" :colour="'yellow'" :data="backlog" />
+    <ErrorGroup
+      :name="'Backlog'"
+      :colour="'yellow'"
+      :action="buttonAction('Start task', backlog, unresolved)"
+      :data="backlog"
+    />
   </ContentContainer>
 </template>
 
