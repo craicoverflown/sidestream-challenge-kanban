@@ -1,28 +1,36 @@
 <template>
-  <ContentContainer>
-    <ErrorGroup
-      :name="'Unresolved'"
-      :colour="'red'"
-      :action="buttonAction('Resolve', unresolved, resolved)"
-      :data="unresolved"
+  <div>
+    <ContentContainer>
+      <ErrorGroup
+        :name="'Unresolved'"
+        :colour="'red'"
+        :action="buttonAction('Resolve', unresolved, resolved)"
+        :data="unresolved"
+      />
+      <ErrorGroup
+        :name="'Resolved'"
+        :colour="'green'"
+        :action="buttonAction('Unresolve', resolved, unresolved)"
+        :data="resolved"
+      />
+      <ErrorGroup
+        :name="'Backlog'"
+        :colour="'yellow'"
+        :action="buttonAction('Start task', backlog, unresolved)"
+        :data="backlog"
+      />
+    </ContentContainer>
+    <FloatingActionButton
+      :buttonText="'Undo previous action'"
+      :action="undoAction"
+      :disabled="actionHistory.length > 0"
     />
-    <ErrorGroup
-      :name="'Resolved'"
-      :colour="'green'"
-      :action="buttonAction('Unresolve', resolved, unresolved)"
-      :data="resolved"
-    />
-    <ErrorGroup
-      :name="'Backlog'"
-      :colour="'yellow'"
-      :action="buttonAction('Start task', backlog, unresolved)"
-      :data="backlog"
-    />
-  </ContentContainer>
+  </div>
 </template>
 
 <script>
 import { buttonAction } from "../utils/errorButtonAction";
+import { actionHistory, undoAction } from "../utils/interactionManager";
 
 export default {
   async asyncData({ $axios }) {
@@ -45,7 +53,9 @@ export default {
       unresolved: [],
       resolved: [],
       backlog: [],
-      buttonAction
+      buttonAction,
+      undoAction,
+      actionHistory
     };
   }
 };
