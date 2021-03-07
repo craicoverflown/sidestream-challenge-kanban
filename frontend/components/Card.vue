@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between space-x-10">
+  <div class="flex justify-between space-x-4">
     <div>
       <h2 class="text-md font-bold text-black mb-0.5">
         Error Code {{ error.code }}
@@ -15,7 +15,7 @@
       <button
         class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white border border-blue-500 hover:border-transparent rounded p-1"
         v-if="action"
-        v-on:click="action.transferError(error.index)"
+        v-on:click="action.handleButtonClick(error.index)"
       >
         {{ action.name }}
       </button>
