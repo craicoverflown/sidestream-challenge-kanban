@@ -1,12 +1,19 @@
 <template>
   <ContentContainer>
-    <ErrorGroup :name="'Unresolved'" :colour="'red'" :data="unresolved" />
+    <ErrorGroup
+      :name="'Unresolved'"
+      :colour="'red'"
+      :action="buttonAction('Resolve', unresolved, resolved)"
+      :data="unresolved"
+    />
     <ErrorGroup :name="'Resolved'" :colour="'green'" :data="resolved" />
-    <ErrorGroup :name="'Backlog'" :colour="'yellow'" :data="unresolved" />
+    <ErrorGroup :name="'Backlog'" :colour="'yellow'" :data="backlog" />
   </ContentContainer>
 </template>
 
 <script>
+import { buttonAction } from "../utils/errorButtonAction";
+
 export default {
   async asyncData({ $axios }) {
     try {
@@ -27,7 +34,8 @@ export default {
     return {
       unresolved: [],
       resolved: [],
-      backlog: []
+      backlog: [],
+      buttonAction
     };
   }
 };
