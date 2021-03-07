@@ -1,3 +1,5 @@
+from typing import Any, Dict, Set
+
 def get_error_codes_as_sets(func):
     """Executes the decorated function alongside its transformed parameters"""
     def wrapper(*args):
@@ -7,6 +9,6 @@ def get_error_codes_as_sets(func):
     return wrapper    
 
 @get_error_codes_as_sets
-def intersect_error_lists(error_dict_a, error_dict_b):
+def intersect_error_lists(error_list_a: Dict[str, Any], error_list_b: Dict[str, Any]) -> Set[int]:
     """Return the intersect of both error dictionary parameters"""
-    return error_dict_a.intersection(error_dict_b)
+    return error_list_a.intersection(error_list_b)
