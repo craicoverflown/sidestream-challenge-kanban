@@ -6,7 +6,7 @@ from typing import Any, Dict
 from fastapi import FastAPI
 import uvicorn
 
-from .intersection import intersect_error_lists
+from .utils.intersection import intersect_error_lists
 
 ERROR_CODES = [error_code for error_code in range(50)]
 LOGGER = logging.getLogger("API")
