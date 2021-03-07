@@ -6,6 +6,8 @@ from typing import Any, Dict
 from fastapi import FastAPI
 import uvicorn
 
+from .intersection import intersect_error_lists
+
 ERROR_CODES = [error_code for error_code in range(50)]
 LOGGER = logging.getLogger("API")
 app = FastAPI()
@@ -79,16 +81,12 @@ def get_list_intersection_counts() -> Dict[str, int]:
     error_lists = _generate_lists()
     resolved, unresolved, backlog = error_lists['resolved'], error_lists['unresolved'], error_lists['backlog']
 
-    # TODO: Implement the code that calculates how many errors with *the same error code* are shared between
-    # the possible pairs of lists here. Then return a Dict like the one shown in the documentation string above,
-    # e.g.:
+    set({error['code'] for error in resolved})
     return  {
-        'resolved_unresolved': 12,
-        'resolved_backlog': 6,
-        'unresolved_backlog': 35
+        'resolved_unresolved': len(intersect_error_lists(resolved, unresolved)),
+        'resolved_backlog': len(intersect_error_lists(resolved, backlog)),
+        'unresolved_backlog': len(intersect_error_lists(unresolved, backlog))
     }
-    # NOTE: THIS IS JUST AN EXAMPLE, REPLACE WITH YOUR OWN CODE AND `return`!
-
 
 def run(host: str, port: int) -> None:
     """Run the code challenge API."""
