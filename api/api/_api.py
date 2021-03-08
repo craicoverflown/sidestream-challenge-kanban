@@ -6,6 +6,8 @@ from typing import Any, Dict
 from fastapi import FastAPI
 import uvicorn
 
+from .utils.request_stats import track_request_error_count
+
 ERROR_CODES = [error_code for error_code in range(50)]
 LOGGER = logging.getLogger("API")
 app = FastAPI()
@@ -33,6 +35,7 @@ def _generate_lists() -> Dict[str, Any]:
 
 
 @app.get("/get_lists")
+@track_request_error_count
 def get_lists() -> Dict[str, Any]:
     """Return resolved, unresolved and backlog lists."""
     LOGGER.info('Generating resolved, unresolved and backlog lists.')
