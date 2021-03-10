@@ -1,3 +1,5 @@
+import { transferErrorToAnotherList } from "./dataManager";
+
 class ErrorButtonAction {
   constructor(name, dataSource, dataTarget) {
     this.name = name;
@@ -5,14 +7,13 @@ class ErrorButtonAction {
     this.dataTarget = dataTarget;
   }
 
-  transferError = index => {
-    const itemIndex = this.dataSource.findIndex(item => item.index === index);
-
-    if (itemIndex > -1) {
-      const [item] = this.dataSource.splice(itemIndex, 1);
-      this.dataTarget.push(item);
-    }
-  };
+  handleButtonClick = errorIndex =>
+    transferErrorToAnotherList({
+      dataSource: this.dataSource,
+      dataTarget: this.dataTarget,
+      errorIndex,
+      rememberAction: true
+    });
 }
 
 export const buttonAction = (name, listSource, listTarget) =>
