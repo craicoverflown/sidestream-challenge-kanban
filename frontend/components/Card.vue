@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between space-x-4">
+  <div class="flex shadow-md justify-between space-x-4">
     <div>
       <h2 class="text-md font-bold text-black mb-0.5">
         Error Code {{ error.code }}
