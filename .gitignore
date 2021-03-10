@@ -1,5 +1,6 @@
 # Python
 __pycache__
+__temp__
 
 # Vue/Nuxt/Javascript
 node_modules
