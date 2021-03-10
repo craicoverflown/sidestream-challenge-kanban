@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-400 flex flex-col rounded p-2">
+  <div class="bg-gray-400 shadow-xl flex flex-col rounded p-2">
     <h2 class="text-lg font-bold text-black mb-0.5">{{ name }}</h2>
 
     <CardList>
