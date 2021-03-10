@@ -11,3 +11,9 @@ export const undoAction = () => {
     previousAction();
   }
 };
+
+export const undoAllActions = () => {
+  for (var i = actionHistory.length; i > 0; i--) {
+    undoAction();
+  }
+};
