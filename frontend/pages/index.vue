@@ -20,19 +20,32 @@
         :data="backlog"
       />
     </ContentContainer>
-    <FloatingActionButton
-      :buttonText="'Undo previous action'"
-      :action="undoAction"
-      :disabled="actionHistory.length > 0"
-    />
+    <FloatingActionButtonGroup>
+      <FloatingActionButton
+        :buttonText="'Undo all actions'"
+        :action="undoAllActions"
+        :disabled="actionHistory.length > 1"
+      />
+      <FloatingActionButton
+        :buttonText="'Undo previous action'"
+        :action="undoAction"
+        :disabled="actionHistory.length > 0"
+      />
+    </FloatingActionButtonGroup>
   </div>
 </template>
 
 <script>
+import FloatingActionButton from "../components/FloatingActionButton.vue";
 import { buttonAction } from "../utils/errorButtonAction";
-import { actionHistory, undoAction } from "../utils/interactionManager";
+import {
+  actionHistory,
+  undoAction,
+  undoAllActions
+} from "../utils/interactionManager";
 
 export default {
+  components: { FloatingActionButton },
   async asyncData({ $axios }) {
     try {
       const { resolved, unresolved, backlog } = await $axios.$get(
@@ -55,6 +68,7 @@ export default {
       backlog: [],
       buttonAction,
       undoAction,
+      undoAllActions,
       actionHistory
     };
   }
