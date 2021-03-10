@@ -4,7 +4,9 @@
 
     <CardList>
       <Card
-        v-bind:class="'bg-' + colour + '-300 rounded p-2'"
+        v-bind:class="
+          `bg-${colour}-300 transition duration-500 ease-in-out hover:bg-${colour}-500 rounded p-2`
+        "
         v-for="error in data"
         :key="error.index"
         :error="error"
