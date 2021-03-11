@@ -1,16 +1,15 @@
 """Module to setup fastapi API to expose API to the outside world."""
-import logging
 import random
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 import uvicorn
 
+from .utils.logger import LOGGER
 from .utils.intersection import intersect_error_lists
 from .utils.request_stats import track_request_error_count
 
 ERROR_CODES = [error_code for error_code in range(50)]
-LOGGER = logging.getLogger("API")
 app = FastAPI()
 
 
@@ -37,7 +36,7 @@ def _generate_lists() -> Dict[str, Any]:
 
 @app.get("/get_lists")
 @track_request_error_count
-def get_lists() -> Dict[str, Any]:
+def get_lists(name: Optional[str] = Query(None)) -> Dict[str, Any]:
     """Return resolved, unresolved and backlog lists."""
     LOGGER.info('Generating resolved, unresolved and backlog lists.')
     return _generate_lists()

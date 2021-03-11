@@ -1,16 +1,22 @@
 """Module for tracking the number of requests for some APIs."""
-import logging
+from collections import defaultdict
+from functools import wraps
 
-LOGGER = logging.getLogger("API")
-request_error_count = 0
+from .logger import LOGGER
+
+# Set default value to 0 for any key
+request_error_count_per_user = defaultdict(lambda: 0, {})
 
 def track_request_error_count(func):
     """Return the decorated function for tracking the count of request for the error API."""
-    def wrapper():
+    @wraps(func)
+    def wrapper(*args, **kwargs):
         """Return function after counting and logging the number of requests."""
-        global request_error_count
-        request_error_count += 1
-        LOGGER.info('Total requests for errors: %s', request_error_count)
-        return func()
+        global request_error_count_per_user
+        name = kwargs['name']
+        request_error_count_per_user[name] += 1
+
+        LOGGER.info('(%s) Total requests for errors: %s', name, request_error_count_per_user[name])
+        return func(*args, **kwargs)
 
     return wrapper

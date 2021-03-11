@@ -1,8 +1,10 @@
 """Module for intersecting data collections."""
 from typing import Any, Dict, Set
+from functools import wraps
 
 def get_error_codes_as_sets(func):
     """Return the decorated function."""
+    @wraps(func)
     def wrapper(*args):
         """Return the parameterised function with transformed parameters."""
         return func(*[set({error['code'] for error in error_dict}) for error_dict in args])
