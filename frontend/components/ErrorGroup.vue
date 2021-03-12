@@ -1,6 +1,9 @@
 <template>
-  <div class="bg-gray-400 shadow-xl flex flex-col rounded p-2">
-    <h2 class="text-lg font-bold text-black mb-0.5">{{ name }}</h2>
+  <div class="bg-gray-400 shadow-xl flex flex-col rounded p-2 space-y-2">
+    <div class="flex justify-between my-auto">
+      <h2 class="text-lg font-bold text-black mb-0.5">{{ name }}</h2>
+      <slot />
+    </div>
     <CardList>
       <Card
         v-bind:class="
