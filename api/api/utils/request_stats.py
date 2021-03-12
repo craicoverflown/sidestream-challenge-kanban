@@ -8,7 +8,7 @@ from .logger import LOGGER
 request_error_count_per_user = defaultdict(lambda: 0, {})
 
 def track_request_error_count(func):
-    """Return the decorated function for tracking the count of request for the error API."""
+    """Return the decorated function for tracking the count of requests for the error API."""
     @wraps(func)
     def wrapper(*args, **kwargs):
         """Return function after counting and logging the number of requests."""
@@ -16,7 +16,7 @@ def track_request_error_count(func):
         name = kwargs['name']
         request_error_count_per_user[name] += 1
 
-        LOGGER.info('(%s) Total requests for errors: %s', name, request_error_count_per_user[name])
+        LOGGER.info('(%s) Total requests for errors: %d', name, request_error_count_per_user[name])
         return func(*args, **kwargs)
 
     return wrapper

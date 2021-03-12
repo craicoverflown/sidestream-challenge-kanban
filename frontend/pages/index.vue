@@ -12,7 +12,13 @@
         :colour="'green'"
         :action="buttonAction('Unresolve', resolved, unresolved)"
         :data="resolved"
-      />
+      >
+        <ErrorGroupButton
+          :tooltipText="'View number of resolved errors by error code'"
+          :data="resolved"
+          :onClick="closeModal"
+        />
+      </ErrorGroup>
       <ErrorGroup
         :name="'Backlog'"
         :colour="'yellow'"
@@ -32,11 +38,16 @@
         :disabled="actionHistory.length > 0"
       />
     </FloatingActionButtonGroup>
+    <Modal v-if="modalState" :onClose="closeModal">
+      <Table>
+        <TableHeader :columns="['Error Code', 'Occurrence']" />
+        <TableBody :data="errorCount" />
+      </Table>
+    </Modal>
   </div>
 </template>
 
 <script>
-import FloatingActionButton from "../components/FloatingActionButton.vue";
 import { buttonAction } from "../utils/errorButtonAction";
 import {
   actionHistory,
@@ -45,7 +56,6 @@ import {
 } from "../utils/interactionManager";
 
 export default {
-  components: { FloatingActionButton },
   async asyncData({ $axios }) {
     try {
       const { resolved, unresolved, backlog } = await $axios.$get(
@@ -61,6 +71,29 @@ export default {
       );
     }
   },
+  methods: {
+    // Control toggle for modal state
+    closeModal: function() {
+      this.modalState = !this.modalState;
+    }
+  },
+  watch: {
+    // Observe modal state change for triggering post request on counting error code occurrences.
+    modalState: async function(newState) {
+      if (newState) {
+        try {
+          this.errorCount = await this.$axios.$post(
+            "http://localhost:8000/count_resolved_error_code_occurrences",
+            this.resolved
+          );
+        } catch (error) {
+          console.log(
+            `Couldn't get error code occurrences:\n${error}\nDid you start the API?`
+          );
+        }
+      }
+    }
+  },
   data() {
     return {
       unresolved: [],
@@ -69,7 +102,9 @@ export default {
       buttonAction,
       undoAction,
       undoAllActions,
-      actionHistory
+      actionHistory,
+      modalState: false,
+      errorCount: []
     };
   }
 };
