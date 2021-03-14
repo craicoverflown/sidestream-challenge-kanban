@@ -4,7 +4,7 @@
     v-bind:title="tooltipText"
     v-on:click="onClick"
   >
-    <img v-bind:src="require('../assets/images/info-24px.svg')" />
+    <MaterialIcon :iconType="'info'" :size="24" />
   </button>
 </template>
 

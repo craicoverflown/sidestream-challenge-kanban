@@ -1,8 +1,7 @@
 import { transferErrorToAnotherList } from "./dataManager";
 
 class ErrorButtonAction {
-  constructor(name, dataSource, dataTarget) {
-    this.name = name;
+  constructor(dataSource, dataTarget) {
     this.dataSource = dataSource;
     this.dataTarget = dataTarget;
   }
@@ -16,5 +15,5 @@ class ErrorButtonAction {
     });
 }
 
-export const buttonAction = (name, listSource, listTarget) =>
-  new ErrorButtonAction(name, listSource, listTarget);
+export const buttonAction = (listSource, listTarget) =>
+  new ErrorButtonAction(listSource, listTarget);
