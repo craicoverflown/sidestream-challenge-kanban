@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-64">
     <h2 class="text-md font-bold text-black mb-0.5">
       Error Code {{ errorCode }}
     </h2>
