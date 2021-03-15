@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ModalWindow :onClose="onClose">
+    <ModalWindow :modalName="modalName" :onClose="onClose">
       <slot />
     </ModalWindow>
     <ModalBackground />
@@ -9,6 +9,6 @@
 
 <script>
 export default {
-  props: ["onClose"]
+  props: ["modalName", "onClose"]
 };
 </script>

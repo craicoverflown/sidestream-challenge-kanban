@@ -1,20 +1,19 @@
 <template>
   <div class="h-screen flex fixed inset-0 z-50">
-    <div
-      class="bg-white flex relative mx-auto max-w-2xl shadow-2xl rounded p-6 m-20"
-    >
-      <div class="flex flex-col space-y-2">
-        <div class="overflow-y-auto">
-          <slot />
-        </div>
-        <div class="flex justify-end">
+    <div class="flex mx-auto p-10 m-20">
+      <div
+        class="bg-white w-96 relative shadow-2xl flex flex-col rounded p-2 space-y-2"
+      >
+        <ModalHeader :modalName="modalName" />
+        <slot />
+        <ModalBottomBar>
           <button
             class="rounded bg-green-500 hover:bg-green-600 transition duration-500 ease-in-out text-white px-4"
             @click="onClose"
           >
             Close
           </button>
-        </div>
+        </ModalBottomBar>
       </div>
     </div>
   </div>
@@ -22,6 +21,6 @@
 
 <script>
 export default {
-  props: ["onClose"]
+  props: ["modalName", "onClose"]
 };
 </script>

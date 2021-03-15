@@ -1,4 +1,4 @@
-import { transferErrorToAnotherList } from "./dataManager";
+import { transferErrorToAnotherList } from "./errorDataManager";
 
 class ErrorButtonAction {
   constructor(dataSource, dataTarget) {

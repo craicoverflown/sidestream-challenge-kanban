@@ -16,7 +16,7 @@
         <ErrorGroupButton
           :tooltipText="resolvedErrorCountTooltip"
           :data="resolved"
-          :onClick="closeModal"
+          :onClick="() => toggleModal(MODAL_VIEWS.ERROR_OCCURRENCES)"
         />
       </ErrorGroup>
       <ErrorGroup
@@ -39,17 +39,32 @@
         :isVisible="actionHistory.length > 0"
         :iconType="ICON_TYPE.UNDO"
       />
+      <FloatingActionButton
+        :tooltipText="FAB_ACTION.NOTIFICATION"
+        :action="() => toggleModal(MODAL_VIEWS.NOTIFICATIONS)"
+        :isVisible="true"
+        :iconType="ICON_TYPE.NOTIFICATION"
+      >
+        <FloatingActionButtonNumber :count="notificationHistory.length" />
+      </FloatingActionButton>
     </FloatingActionButtonGroup>
-    <Modal v-if="modalState" :onClose="closeModal">
-      <Table>
-        <TableHeader
-          :columns="[
-            ERROR_FREQUENCY_COLUMN.ERROR_CODE,
-            ERROR_FREQUENCY_COLUMN.OCCURRENCE
-          ]"
-        />
-        <TableBody :data="errorCount" />
-      </Table>
+    <Modal
+      v-if="modalState"
+      :modalName="selectedModal"
+      :onClose="() => toggleModal()"
+    >
+      <Table
+        v-if="selectedModal === MODAL_VIEWS.ERROR_OCCURRENCES"
+        :data="errorCount"
+        :columns="[
+          ERROR_FREQUENCY_COLUMN.ERROR_CODE,
+          ERROR_FREQUENCY_COLUMN.OCCURRENCE
+        ]"
+      />
+      <NotificationWindow
+        v-if="selectedModal === MODAL_VIEWS.NOTIFICATIONS"
+        :data="notificationHistory"
+      />
     </Modal>
   </div>
 </template>
