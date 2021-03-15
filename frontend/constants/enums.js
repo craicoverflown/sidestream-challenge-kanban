@@ -6,8 +6,9 @@ export const COLOUR = Object.freeze({
 });
 
 export const FAB_ACTION = Object.freeze({
-  UNDO: "Undo",
-  UNDO_ALL: "Undo all"
+  UNDO: "Undo previews action",
+  UNDO_ALL: "Undo all actions",
+  NOTIFICATION: "View notifications"
 });
 
 export const ERROR_GROUP = Object.freeze({
@@ -16,13 +17,20 @@ export const ERROR_GROUP = Object.freeze({
   BACKLOG: "Backlog"
 });
 
+export const ACTION_TYPE = Object.freeze({
+  MOVE: "move",
+  UNDO: "undo",
+  UNDO_ALL: "undo all"
+});
+
 export const ICON_TYPE = Object.freeze({
   ADD: "add",
   RESOLVE: "resolve",
   UNRESOLVE: "unresolve",
   INFO: "info",
   UNDO: "undo",
-  UNDO_ALL: "undoAll"
+  UNDO_ALL: "undoAll",
+  NOTIFICATION: "notification"
 });
 
 export const ICON_PATH = Object.freeze({
@@ -35,10 +43,17 @@ export const ICON_PATH = Object.freeze({
   UNDO:
     "M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z",
   UNDO_ALL:
-    "M6,13c0-1.65,0.67-3.15,1.76-4.24L6.34,7.34C4.9,8.79,4,10.79,4,13c0,4.08,3.05,7.44,7,7.93v-2.02 C8.17,18.43,6,15.97,6,13z M20,13c0-4.42-3.58-8-8-8c-0.06,0-0.12,0.01-0.18,0.01l1.09-1.09L11.5,2.5L8,6l3.5,3.5l1.41-1.41 l-1.08-1.08C11.89,7.01,11.95,7,12,7c3.31,0,6,2.69,6,6c0,2.97-2.17,5.43-5,5.91v2.02C16.95,20.44,20,17.08,20,13z"
+    "M6,13c0-1.65,0.67-3.15,1.76-4.24L6.34,7.34C4.9,8.79,4,10.79,4,13c0,4.08,3.05,7.44,7,7.93v-2.02 C8.17,18.43,6,15.97,6,13z M20,13c0-4.42-3.58-8-8-8c-0.06,0-0.12,0.01-0.18,0.01l1.09-1.09L11.5,2.5L8,6l3.5,3.5l1.41-1.41 l-1.08-1.08C11.89,7.01,11.95,7,12,7c3.31,0,6,2.69,6,6c0,2.97-2.17,5.43-5,5.91v2.02C16.95,20.44,20,17.08,20,13z",
+  NOTIFICATION:
+    "M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"
 });
 
 export const ERROR_FREQUENCY_COLUMN = Object.freeze({
   ERROR_CODE: "Error Code",
   OCCURRENCE: "Occurrence"
+});
+
+export const MODAL_VIEWS = Object.freeze({
+  ERROR_OCCURRENCES: "Error Code Occurrences",
+  NOTIFICATIONS: "Notifications"
 });
