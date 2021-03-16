@@ -1,6 +1,6 @@
 <template>
   <button
-    class="transition duration-500 ease-in-out hover:opacity-25"
+    class="transition duration-500 ease-in-out focus:outline-none hover:opacity-25"
     v-bind:title="tooltipText"
     v-on:click="onClick"
   >
