@@ -23,6 +23,12 @@ export const ACTION_TYPE = Object.freeze({
   UNDO_ALL: "undo all"
 });
 
+export const STATE_PHRASE = Object.freeze({
+  RESOLVED: "that is `resolved`",
+  UNRESOLVED: "that is `unresolved`",
+  BACKLOG: "that is in the `backlog`"
+});
+
 export const ICON_TYPE = Object.freeze({
   ADD: "add",
   RESOLVE: "resolve",

@@ -10,6 +10,6 @@
 
 <script>
 export default {
-  props: ["tooltipText", "onClick", "data"]
+  props: ["tooltipText", "onClick"]
 };
 </script>

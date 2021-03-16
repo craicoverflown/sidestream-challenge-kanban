@@ -5,17 +5,16 @@
         :name="ERROR_GROUP.UNRESOLVED"
         :colour="COLOUR.RED"
         :action="buttonAction(unresolved, resolved)"
-        :data="unresolved"
+        :data="unresolved.data"
       />
       <ErrorGroup
         :name="ERROR_GROUP.RESOLVED"
         :colour="COLOUR.GREEN"
         :action="buttonAction(resolved, unresolved)"
-        :data="resolved"
+        :data="resolved.data"
       >
         <ErrorGroupButton
           :tooltipText="resolvedErrorCountTooltip"
-          :data="resolved"
           :onClick="() => toggleModal(MODAL_VIEWS.ERROR_OCCURRENCES)"
         />
       </ErrorGroup>
@@ -23,7 +22,7 @@
         :name="ERROR_GROUP.BACKLOG"
         :colour="COLOUR.YELLOW"
         :action="buttonAction(backlog, unresolved)"
-        :data="backlog"
+        :data="backlog.data"
       />
     </ContentContainer>
     <FloatingActionButtonGroup>
