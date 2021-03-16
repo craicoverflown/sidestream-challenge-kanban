@@ -1,6 +1,6 @@
 <template>
   <button
-    class="bg-blue-400 shadow-xl hover:bg-blue-700 hover:shadow-xl transition duration-500 transform hover:-translate-y-2 text-white font-bold py-4 px-4 rounded-full"
+    class="bg-blue-400 shadow-xl hover:bg-blue-700 hover:shadow-xl transition duration-500 transform hover:-translate-y-2 focus:outline-none text-white font-bold py-4 px-4 rounded-full"
     v-bind:title="tooltipText"
     v-on:click="action"
     v-if="isVisible"
