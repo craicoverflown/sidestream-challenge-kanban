@@ -20,14 +20,17 @@ import { notificationHistory } from "../utils/notificationManager";
 export const componentDataLayer = {
   async asyncData({ $axios }) {
     try {
-      const {
-        resolved,
-        unresolved,
-        backlog
-      } = await $axios.$get("http://localhost:8000/get_lists", {
-        params: { name: `${operator.name} ${operator.surname}` }
-      });
-      return { resolved, unresolved, backlog };
+      const { resolved, unresolved, backlog } = await $axios.$get(
+        "http://localhost:8000/get_lists",
+        {
+          params: { name: `${operator.name} ${operator.surname}` }
+        }
+      );
+      return {
+        resolved: { label: ERROR_GROUP.RESOLVED, data: resolved },
+        unresolved: { label: ERROR_GROUP.UNRESOLVED, data: unresolved },
+        backlog: { label: ERROR_GROUP.BACKLOG, data: backlog }
+      };
     } catch (error) {
       console.log(
         `Couldn't get error lists:\n${error}\nDid you start the API?`

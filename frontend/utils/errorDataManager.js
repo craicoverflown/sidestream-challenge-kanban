@@ -1,6 +1,11 @@
 import { addMessageToNotification } from "./notificationManager";
 import { recordAction } from "./interactionManager";
-import { ACTION_TYPE, ICON_TYPE, ERROR_GROUP } from "../constants/enums";
+import {
+  ACTION_TYPE,
+  ICON_TYPE,
+  ERROR_GROUP,
+  STATE_PHRASE
+} from "../constants/enums";
 
 export const transferErrorToAnotherList = ({
   dataSource,
@@ -10,20 +15,35 @@ export const transferErrorToAnotherList = ({
   actionType = ACTION_TYPE.MOVE,
   rememberAction = false
 }) => {
-  const itemIndex = dataSource.findIndex(item => item.index === errorIndex);
+  const { label: labelSource, data: listSource } = dataSource;
+  const { label: labelTarget, data: listTarget } = dataTarget;
+
+  const itemIndex = listSource.findIndex(item => item.index === errorIndex);
 
   if (itemIndex > -1) {
-    const [item] = dataSource.splice(itemIndex, 1);
+    const [item] = listSource.splice(itemIndex, 1);
+
+    item.text = updateErrorMessage(
+      item,
+      labelSource,
+      labelTarget,
+      actionType === ACTION_TYPE.MOVE
+    );
 
     if (positionIndex > -1) {
-      dataTarget.splice(positionIndex, 0, item);
+      listTarget.splice(positionIndex, 0, item);
     } else {
-      dataTarget.push(item);
+      listTarget.push(item);
     }
 
     // Record the user's action as notification.
     if (actionType === ACTION_TYPE.MOVE || actionType === ACTION_TYPE.UNDO) {
-      createNotificationFromShiftedError(item, actionType === ACTION_TYPE.MOVE);
+      createNotificationTextFromShiftedError(
+        item,
+        labelSource,
+        labelTarget,
+        actionType === ACTION_TYPE.MOVE
+      );
     }
 
     // Record this action as a means of reversing it on demand.
@@ -41,30 +61,59 @@ export const transferErrorToAnotherList = ({
   }
 };
 
-const createNotificationFromShiftedError = ({ code, text }, isActionMove) => {
-  const [
-    source,
-    destination,
-    notificationIcon
-  ] = getSourceAndDestinationFromErrorText(text);
+const updateErrorMessage = ({ text }, source, destination, isActionMove) =>
+  [
+    text.split(", ")[0],
+    getNewErrorStatusMessageByErrorShift(source, destination, isActionMove)
+  ].join(", ");
+
+const createNotificationTextFromShiftedError = (
+  { code },
+  source,
+  destination,
+  isActionMove
+) => {
+  const notificationIcon = getNotificationIconByErrorShift(source, destination);
 
   addMessageToNotification({
-    message: `{name} {surname} ${
-      isActionMove ? "moved" : "reversed moving"
-    } Error Code ${code} from ${source} to ${destination}.`,
+    message: `{name} {surname} moved Error Code ${code} from ${source} to ${destination}.`,
     iconType: isActionMove ? notificationIcon : ICON_TYPE.UNDO
   });
 };
 
-const getSourceAndDestinationFromErrorText = text => {
-  if (isErrorFromGroup(text, ERROR_GROUP.UNRESOLVED)) {
-    return [ERROR_GROUP.UNRESOLVED, ERROR_GROUP.RESOLVED, ICON_TYPE.RESOLVE];
-  } else if (isErrorFromGroup(text, ERROR_GROUP.RESOLVED)) {
-    return [ERROR_GROUP.RESOLVED, ERROR_GROUP.UNRESOLVED, ICON_TYPE.UNRESOLVE];
-  } else if (isErrorFromGroup(text, ERROR_GROUP.BACKLOG)) {
-    return [ERROR_GROUP.BACKLOG, ERROR_GROUP.UNRESOLVED, ICON_TYPE.ADD];
+const getNewErrorStatusMessageByErrorShift = (
+  source,
+  destination,
+  isActionMove
+) => {
+  if (
+    source === ERROR_GROUP.UNRESOLVED &&
+    destination === ERROR_GROUP.RESOLVED
+  ) {
+    return STATE_PHRASE.RESOLVED;
+  } else if (
+    !isActionMove &&
+    source === ERROR_GROUP.UNRESOLVED &&
+    destination === ERROR_GROUP.BACKLOG
+  ) {
+    return STATE_PHRASE.BACKLOG;
+  } else {
+    return STATE_PHRASE.UNRESOLVED;
   }
 };
 
-const isErrorFromGroup = (text, group) =>
-  text.split("`").includes(group.toLowerCase());
+const getNotificationIconByErrorShift = (source, destination) => {
+  if (
+    source === ERROR_GROUP.UNRESOLVED &&
+    destination === ERROR_GROUP.RESOLVED
+  ) {
+    return ICON_TYPE.RESOLVE;
+  } else if (
+    source === ERROR_GROUP.RESOLVED &&
+    destination === ERROR_GROUP.UNRESOLVED
+  ) {
+    return ICON_TYPE.UNRESOLVE;
+  } else {
+    return ICON_TYPE.ADD;
+  }
+};
