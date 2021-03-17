@@ -23,12 +23,7 @@ export const transferErrorToAnotherList = ({
   if (itemIndex > -1) {
     const [item] = listSource.splice(itemIndex, 1);
 
-    item.text = updateErrorMessage(
-      item,
-      labelSource,
-      labelTarget,
-      actionType === ACTION_TYPE.MOVE
-    );
+    item.text = updateErrorMessage(item, labelSource, labelTarget);
 
     if (positionIndex > -1) {
       listTarget.splice(positionIndex, 0, item);
@@ -61,10 +56,10 @@ export const transferErrorToAnotherList = ({
   }
 };
 
-const updateErrorMessage = ({ text }, source, destination, isActionMove) =>
+const updateErrorMessage = ({ text }, source, destination) =>
   [
     text.split(", ")[0],
-    getNewErrorStatusMessageByErrorShift(source, destination, isActionMove)
+    getNewErrorStatusMessageByErrorShift(source, destination)
   ].join(", ");
 
 const createNotificationTextFromShiftedError = (
@@ -81,18 +76,13 @@ const createNotificationTextFromShiftedError = (
   });
 };
 
-const getNewErrorStatusMessageByErrorShift = (
-  source,
-  destination,
-  isActionMove
-) => {
+const getNewErrorStatusMessageByErrorShift = (source, destination) => {
   if (
     source === ERROR_GROUP.UNRESOLVED &&
     destination === ERROR_GROUP.RESOLVED
   ) {
     return STATE_PHRASE.RESOLVED;
   } else if (
-    !isActionMove &&
     source === ERROR_GROUP.UNRESOLVED &&
     destination === ERROR_GROUP.BACKLOG
   ) {
