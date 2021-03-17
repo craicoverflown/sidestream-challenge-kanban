@@ -5,11 +5,11 @@ commands:
     steps:
       - checkout
       - run:
-        name: Install relevant packages for frontend
-        command: npm --prefix ./frontend install
+          name: Install relevant packages for frontend
+          command: npm --prefix ./frontend install
       - run:
-        name: Run unit tests for frontend
-        command: npm --prefix ./frontend test
+          name: Run unit tests for frontend
+          command: npm --prefix ./frontend test
 
 executors:
   docker-executor-node:
