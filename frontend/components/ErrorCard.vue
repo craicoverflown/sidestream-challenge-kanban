@@ -1,5 +1,9 @@
 <template>
-  <div class="flex shadow-md justify-between space-x-4">
+  <div
+    v-bind:class="
+      `bg-${colour}-300 transition duration-500 ease-in-out hover:bg-${colour}-500 flex shadow-md justify-between space-x-4 rounded-xl p-2`
+    "
+  >
     <ErrorCardContent :errorCode="error.code" :errorMessage="error.text" />
     <ErrorCardButton
       :index="error.index"
@@ -14,7 +18,7 @@
 import { buttonData } from "../constants/data";
 
 export default {
-  props: ["error", "group", "action"],
+  props: ["error", "group", "action", "colour"],
   data() {
     return {
       buttonData
