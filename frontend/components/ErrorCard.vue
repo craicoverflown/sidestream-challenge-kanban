@@ -7,7 +7,7 @@
     <ErrorCardContent :errorCode="error.code" :errorMessage="error.text" />
     <ErrorCardButton
       :index="error.index"
-      :buttonMethod="action.handleButtonClick"
+      :buttonMethod="action"
       :buttonData="buttonData[group]"
       v-if="action"
     />

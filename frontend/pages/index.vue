@@ -4,13 +4,13 @@
       <ErrorGroup
         :name="ERROR_GROUP.UNRESOLVED"
         :colour="COLOUR.RED"
-        :action="buttonAction(unresolved, resolved)"
+        :action="errorCardButtonAction(unresolved, resolved)"
         :data="unresolved.data"
       />
       <ErrorGroup
         :name="ERROR_GROUP.RESOLVED"
         :colour="COLOUR.GREEN"
-        :action="buttonAction(resolved, unresolved)"
+        :action="errorCardButtonAction(resolved, unresolved)"
         :data="resolved.data"
       >
         <ErrorGroupButton
@@ -21,7 +21,7 @@
       <ErrorGroup
         :name="ERROR_GROUP.BACKLOG"
         :colour="COLOUR.YELLOW"
-        :action="buttonAction(backlog, unresolved)"
+        :action="errorCardButtonAction(backlog, unresolved)"
         :data="backlog.data"
       />
     </ContentContainer>

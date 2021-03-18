@@ -4,7 +4,7 @@ export const notificationHistory = [];
 
 export const addMessageToNotification = ({ message, iconType }) =>
   notificationHistory.unshift({
-    index: notificationHistory.length + 1,
+    index: notificationHistory.length,
     time: new Date(),
     text: message
       .replace("{name}", operator.name)
