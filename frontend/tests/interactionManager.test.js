@@ -1,5 +1,10 @@
 import { notificationHistory } from "../utils/notificationManager";
-import { ERROR_GROUP, ICON_TYPE, STATE_PHRASE } from "../constants/enums";
+import {
+  ACTION_TYPE,
+  ERROR_GROUP,
+  ICON_TYPE,
+  STATE_PHRASE
+} from "../constants/enums";
 import { transferErrorToAnotherList } from "../utils/errorDataManager";
 import {
   actionHistory,
@@ -70,7 +75,7 @@ describe("Undo previous method(s)", () => {
         ])
       );
 
-      undoAction();
+      undoAction({ actionType: ACTION_TYPE.UNDO });
 
       expect(backlog.data).toEqual(
         expect.arrayContaining([

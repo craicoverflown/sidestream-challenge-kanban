@@ -16,7 +16,7 @@ export const recordAction = previousAction => {
   actionHistory.push(previousAction);
 };
 
-export const undoAction = (actionType = ACTION_TYPE.UNDO) => {
+export const undoAction = ({ actionType = ACTION_TYPE.UNDO } = {}) => {
   const [params, previousAction] = actionHistory.pop();
 
   if (previousAction) {
@@ -31,7 +31,7 @@ export const undoAllActions = () => {
 
   if (actionHistory.length === 0) {
     addMessageToNotification({
-      message: "{name} {surname} reversed all actions.",
+      message: "{name} {surname} reverted all actions.",
       iconType: ICON_TYPE.UNDO_ALL
     });
   }
