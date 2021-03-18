@@ -2,7 +2,7 @@
   <div class="h-screen flex fixed inset-0 z-50">
     <div class="flex mx-auto p-10 m-16">
       <div
-        class="bg-white w-84 xl:w-96 relative shadow-2xl flex flex-col rounded-xl p-2 space-y-2"
+        class="bg-white w-72 lg:w-84 xl:w-96 relative shadow-2xl flex flex-col rounded-xl p-2 space-y-2"
       >
         <ModalHeader :modalName="modalName" />
         <slot />
