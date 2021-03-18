@@ -31,7 +31,7 @@ export const undoAllActions = () => {
 
   if (actionHistory.length === 0) {
     addMessageToNotification({
-      message: "{name} {surname} reversed all actions.",
+      message: "{name} {surname} reverted all actions.",
       iconType: ICON_TYPE.UNDO_ALL
     });
   }
