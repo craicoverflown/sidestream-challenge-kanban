@@ -10,7 +10,6 @@
       v-bind:iconType="iconType"
       v-bind:size="36"
     />
-    <slot />
   </button>
 </template>
 

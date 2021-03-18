@@ -79,6 +79,12 @@ describe("Get material icon by icon type", () => {
       );
     });
 
+    test("Retrieve 'generic avatar' icon from ICON_PATH", () => {
+      expect(getMaterialIconByType(ICON_TYPE.GENERIC_AVATAR)).toEqual(
+        ICON_PATH.GENERIC_AVATAR
+      );
+    });
+
     test("Retrieve 'info' icon from ICON_PATH", () => {
       expect(getMaterialIconByType(ICON_TYPE.INFO)).toEqual(ICON_PATH.INFO);
     });
@@ -116,6 +122,12 @@ describe("Get material icon by icon type", () => {
     test("Retrieved 'notification' icon is not any other string", () => {
       expect(getMaterialIconByType(ICON_TYPE.NOTIFICATION)).not.toEqual(
         "ICON_PATH.NOTIFICATION"
+      );
+    });
+
+    test("Retrieved 'generic avatar' icon is not any other string", () => {
+      expect(getMaterialIconByType(ICON_TYPE.GENERIC_AVATAR)).not.toEqual(
+        "ICON_PATH.GENERIC_AVATAR"
       );
     });
 

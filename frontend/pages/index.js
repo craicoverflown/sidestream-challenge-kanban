@@ -81,6 +81,7 @@ export const componentDataLayer = {
       errorCardButtonAction,
       undoAction,
       undoAllActions,
+      operator,
       actionHistory,
       notificationHistory,
       selectedModal: undefined,

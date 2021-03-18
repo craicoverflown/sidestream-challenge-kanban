@@ -1,5 +1,13 @@
 <template>
-  <div>
+  <PageContainer>
+    <NavigationBar>
+      <NavigationBarNotificationButton
+        :onClick="() => toggleModal(MODAL_VIEWS.NOTIFICATIONS)"
+        :notificationCount="notificationHistory.length"
+      />
+      <NavigationBarUserBox :operator="operator" />
+    </NavigationBar>
+
     <ContentContainer>
       <ErrorGroup
         :name="ERROR_GROUP.UNRESOLVED"
@@ -38,14 +46,6 @@
         :isVisible="actionHistory.length > 0"
         :iconType="ICON_TYPE.UNDO"
       />
-      <FloatingActionButton
-        :tooltipText="FAB_ACTION.NOTIFICATION"
-        :action="() => toggleModal(MODAL_VIEWS.NOTIFICATIONS)"
-        :isVisible="true"
-        :iconType="ICON_TYPE.NOTIFICATION"
-      >
-        <FloatingActionButtonNumber :count="notificationHistory.length" />
-      </FloatingActionButton>
     </FloatingActionButtonGroup>
     <Modal
       v-if="modalState"
@@ -65,7 +65,7 @@
         :data="notificationHistory"
       />
     </Modal>
-  </div>
+  </PageContainer>
 </template>
 
 <script>
