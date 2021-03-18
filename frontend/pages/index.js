@@ -9,8 +9,8 @@ import {
 } from "../constants/enums";
 import { resolvedErrorCountTooltip } from "../constants/data";
 import { operator } from "../constants/mockData";
-import { buttonAction } from "../utils/errorButtonAction";
 import {
+  errorCardButtonAction,
   actionHistory,
   undoAction,
   undoAllActions
@@ -78,7 +78,7 @@ export const componentDataLayer = {
       unresolved: [],
       resolved: [],
       backlog: [],
-      buttonAction,
+      errorCardButtonAction,
       undoAction,
       undoAllActions,
       actionHistory,
