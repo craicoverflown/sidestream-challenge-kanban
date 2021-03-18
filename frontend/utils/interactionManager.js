@@ -16,7 +16,7 @@ export const recordAction = previousAction => {
   actionHistory.push(previousAction);
 };
 
-export const undoAction = (actionType = ACTION_TYPE.UNDO) => {
+export const undoAction = ({ actionType = ACTION_TYPE.UNDO } = {}) => {
   const [params, previousAction] = actionHistory.pop();
 
   if (previousAction) {
