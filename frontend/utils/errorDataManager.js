@@ -7,6 +7,16 @@ import {
   STATE_PHRASE
 } from "../constants/enums";
 
+/**
+ * Moves an error from one error group to another.
+ *
+ * @param dataSource Outbound object with label and list from which the error will depart.
+ * @param dataTarget Inbound object with label and list to which the outbound error arrives.
+ * @param errorIndex Index position of the selected outbound error.
+ * @param positionIndex Index position of the inbound list where the outbound error will be inserted.
+ * @param actionType Type of action that determines the type of the notification.
+ * @param rememberAction Flag for enabling a reversion of this operation later on.
+ */
 export const transferErrorToAnotherList = ({
   dataSource,
   dataTarget,
@@ -56,19 +66,36 @@ export const transferErrorToAnotherList = ({
   }
 };
 
-const updateErrorMessage = ({ text }, source, destination) =>
+/**
+ * Returns the changed error text of some error upon error group shift.
+ *
+ * @param text Takes the text of some error to update its status based on its next error group.
+ * @param sourceLabel The label of the outbound error group.
+ * @param destinationLabel The label of the inbound error group.
+ */
+const updateErrorMessage = ({ text }, sourceLabel, destinationLabel) =>
   [
     text.split(", ")[0],
-    getNewErrorStatusMessageByErrorShift(source, destination)
+    getNewErrorStatusMessageByErrorShift(sourceLabel, destinationLabel)
   ].join(", ");
 
+/**
+ * Creates a notification based on message and its icon.
+ *
+ * @param code Takes the code of some error to create a notification for it.
+ * @param sourceLabel The label of the outbound error group.
+ * @param destinationLabel The label of the inbound error group.
+ */
 const createNotificationTextFromShiftedError = (
   { code },
   source,
   destination,
   isActionMove
 ) => {
-  const notificationIcon = getNotificationIconByErrorShift(source, destination);
+  const notificationIcon = getNotificationIconTypeByErrorShift(
+    source,
+    destination
+  );
 
   addMessageToNotification({
     message: `{name} {surname} moved Error Code ${code} from ${source} to ${destination}.`,
@@ -76,15 +103,24 @@ const createNotificationTextFromShiftedError = (
   });
 };
 
-const getNewErrorStatusMessageByErrorShift = (source, destination) => {
+/**
+ * Returns a state phrase as a means of updating an error's text that is to be shifted.
+ *
+ * @param sourceLabel The label of the outbound error group.
+ * @param destinationLabel The label of the inbound error group.
+ */
+const getNewErrorStatusMessageByErrorShift = (
+  sourceLabel,
+  destinationLabel
+) => {
   if (
-    source === ERROR_GROUP.UNRESOLVED &&
-    destination === ERROR_GROUP.RESOLVED
+    sourceLabel === ERROR_GROUP.UNRESOLVED &&
+    destinationLabel === ERROR_GROUP.RESOLVED
   ) {
     return STATE_PHRASE.RESOLVED;
   } else if (
-    source === ERROR_GROUP.UNRESOLVED &&
-    destination === ERROR_GROUP.BACKLOG
+    sourceLabel === ERROR_GROUP.UNRESOLVED &&
+    destinationLabel === ERROR_GROUP.BACKLOG
   ) {
     return STATE_PHRASE.BACKLOG;
   } else {
@@ -92,15 +128,21 @@ const getNewErrorStatusMessageByErrorShift = (source, destination) => {
   }
 };
 
-const getNotificationIconByErrorShift = (source, destination) => {
+/**
+ * Returns a notification icon type as a means of updating an error's text that is to be shifted.
+ *
+ * @param sourceLabel The label of the outbound error group.
+ * @param destinationLabel The label of the inbound error group.
+ */
+const getNotificationIconTypeByErrorShift = (sourceLabel, destinationLabel) => {
   if (
-    source === ERROR_GROUP.UNRESOLVED &&
-    destination === ERROR_GROUP.RESOLVED
+    sourceLabel === ERROR_GROUP.UNRESOLVED &&
+    destinationLabel === ERROR_GROUP.RESOLVED
   ) {
     return ICON_TYPE.RESOLVE;
   } else if (
-    source === ERROR_GROUP.RESOLVED &&
-    destination === ERROR_GROUP.UNRESOLVED
+    sourceLabel === ERROR_GROUP.RESOLVED &&
+    destinationLabel === ERROR_GROUP.UNRESOLVED
   ) {
     return ICON_TYPE.UNRESOLVE;
   } else {
