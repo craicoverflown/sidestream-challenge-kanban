@@ -1,7 +1,7 @@
 import { COLOUR, ICON_PATH, ICON_TYPE } from "../constants/enums";
 import {
   getColourByIconType,
-  getMaterialIconByType
+  getMaterialIconByIconType
 } from "../utils/materialIconManager";
 
 describe("Get colour by icon type", () => {
@@ -48,91 +48,93 @@ describe("Get colour by icon type", () => {
 describe("Get material icon by icon type", () => {
   describe("Success cases", () => {
     test("Retrieve 'resolve' icon from ICON_PATH", () => {
-      expect(getMaterialIconByType(ICON_TYPE.RESOLVE)).toEqual(
+      expect(getMaterialIconByIconType(ICON_TYPE.RESOLVE)).toEqual(
         ICON_PATH.RESOLVE
       );
     });
 
     test("Retrieve 'unresolve' icon from ICON_PATH", () => {
-      expect(getMaterialIconByType(ICON_TYPE.UNRESOLVE)).toEqual(
+      expect(getMaterialIconByIconType(ICON_TYPE.UNRESOLVE)).toEqual(
         ICON_PATH.UNRESOLVE
       );
     });
 
     test("Retrieve 'add' icon from ICON_PATH", () => {
-      expect(getMaterialIconByType(ICON_TYPE.ADD)).toEqual(ICON_PATH.ADD);
+      expect(getMaterialIconByIconType(ICON_TYPE.ADD)).toEqual(ICON_PATH.ADD);
     });
 
     test("Retrieve 'undo' icon from ICON_PATH", () => {
-      expect(getMaterialIconByType(ICON_TYPE.UNDO)).toEqual(ICON_PATH.UNDO);
+      expect(getMaterialIconByIconType(ICON_TYPE.UNDO)).toEqual(ICON_PATH.UNDO);
     });
 
     test("Retrieve 'undo all' icon from ICON_PATH", () => {
-      expect(getMaterialIconByType(ICON_TYPE.UNDO_ALL)).toEqual(
+      expect(getMaterialIconByIconType(ICON_TYPE.UNDO_ALL)).toEqual(
         ICON_PATH.UNDO_ALL
       );
     });
 
     test("Retrieve 'notification' icon from ICON_PATH", () => {
-      expect(getMaterialIconByType(ICON_TYPE.NOTIFICATION)).toEqual(
+      expect(getMaterialIconByIconType(ICON_TYPE.NOTIFICATION)).toEqual(
         ICON_PATH.NOTIFICATION
       );
     });
 
     test("Retrieve 'generic avatar' icon from ICON_PATH", () => {
-      expect(getMaterialIconByType(ICON_TYPE.GENERIC_AVATAR)).toEqual(
+      expect(getMaterialIconByIconType(ICON_TYPE.GENERIC_AVATAR)).toEqual(
         ICON_PATH.GENERIC_AVATAR
       );
     });
 
     test("Retrieve 'info' icon from ICON_PATH", () => {
-      expect(getMaterialIconByType(ICON_TYPE.INFO)).toEqual(ICON_PATH.INFO);
+      expect(getMaterialIconByIconType(ICON_TYPE.INFO)).toEqual(ICON_PATH.INFO);
     });
   });
 
   describe("Fail cases", () => {
     test("Retrieved 'resolve' icon is not any other string", () => {
-      expect(getMaterialIconByType(ICON_TYPE.RESOLVE)).not.toEqual(
+      expect(getMaterialIconByIconType(ICON_TYPE.RESOLVE)).not.toEqual(
         "ICON_PATH.RESOLVE"
       );
     });
 
     test("Retrieved 'unresolve' icon is not any other string", () => {
-      expect(getMaterialIconByType(ICON_TYPE.UNRESOLVE)).not.toEqual(
+      expect(getMaterialIconByIconType(ICON_TYPE.UNRESOLVE)).not.toEqual(
         "ICON_PATH.UNRESOLVE"
       );
     });
 
     test("Retrieved 'add' icon is not any other string", () => {
-      expect(getMaterialIconByType(ICON_TYPE.ADD)).not.toEqual("ICON_PATH.ADD");
+      expect(getMaterialIconByIconType(ICON_TYPE.ADD)).not.toEqual(
+        "ICON_PATH.ADD"
+      );
     });
 
     test("Retrieved 'undo' icon is not any other string", () => {
-      expect(getMaterialIconByType(ICON_TYPE.UNDO)).not.toEqual(
+      expect(getMaterialIconByIconType(ICON_TYPE.UNDO)).not.toEqual(
         "ICON_PATH.UNDO"
       );
     });
 
     test("Retrieved 'undo all' icon is not any other string", () => {
-      expect(getMaterialIconByType(ICON_TYPE.UNDO_ALL)).not.toEqual(
+      expect(getMaterialIconByIconType(ICON_TYPE.UNDO_ALL)).not.toEqual(
         "ICON_PATH.UNDO_ALL"
       );
     });
 
     test("Retrieved 'notification' icon is not any other string", () => {
-      expect(getMaterialIconByType(ICON_TYPE.NOTIFICATION)).not.toEqual(
+      expect(getMaterialIconByIconType(ICON_TYPE.NOTIFICATION)).not.toEqual(
         "ICON_PATH.NOTIFICATION"
       );
     });
 
     test("Retrieved 'generic avatar' icon is not any other string", () => {
-      expect(getMaterialIconByType(ICON_TYPE.GENERIC_AVATAR)).not.toEqual(
+      expect(getMaterialIconByIconType(ICON_TYPE.GENERIC_AVATAR)).not.toEqual(
         "ICON_PATH.GENERIC_AVATAR"
       );
     });
 
     test("Retrieved 'info' icon is not any other string", () => {
-      expect(getMaterialIconByType(ICON_TYPE.INFO)).not.toEqual(
+      expect(getMaterialIconByIconType(ICON_TYPE.INFO)).not.toEqual(
         "ICON_PATH.INFO"
       );
     });

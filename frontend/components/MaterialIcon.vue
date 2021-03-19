@@ -6,17 +6,17 @@
     viewBox="0 0 24 24"
     fill="#000000"
   >
-    <path v-bind:d="getMaterialIconByType(iconType)" />
+    <path v-bind:d="getMaterialIconByIconType(iconType)" />
   </svg>
 </template>
 
 <script>
-import { getMaterialIconByType } from "../utils/materialIconManager";
+import { getMaterialIconByIconType } from "../utils/materialIconManager";
 
 export default {
   props: ["iconType", "size"],
   data() {
-    return { getMaterialIconByType };
+    return { getMaterialIconByIconType };
   }
 };
 </script>
