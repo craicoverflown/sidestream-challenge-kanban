@@ -466,14 +466,14 @@ describe("Create notification after shifting error", () => {
 });
 
 describe("Get notification icon by action from error group", () => {
-  const getNotificationIconByErrorShift = errorDataManager.__get__(
-    "getNotificationIconByErrorShift"
+  const getNotificationIconTypeByErrorShift = errorDataManager.__get__(
+    "getNotificationIconTypeByErrorShift"
   );
 
   describe("Success cases", () => {
     test("Returns 'resolve' icon from 'Unresolved' group", () => {
       expect(
-        getNotificationIconByErrorShift(
+        getNotificationIconTypeByErrorShift(
           ERROR_GROUP.UNRESOLVED,
           ERROR_GROUP.RESOLVED
         )
@@ -482,7 +482,7 @@ describe("Get notification icon by action from error group", () => {
 
     test("Returns 'unresolve' icon from 'Resolved' group", () => {
       expect(
-        getNotificationIconByErrorShift(
+        getNotificationIconTypeByErrorShift(
           ERROR_GROUP.RESOLVED,
           ERROR_GROUP.UNRESOLVED
         )
@@ -491,7 +491,7 @@ describe("Get notification icon by action from error group", () => {
 
     test("Returns 'add' icon from 'Backlog' group", () => {
       expect(
-        getNotificationIconByErrorShift(
+        getNotificationIconTypeByErrorShift(
           ERROR_GROUP.BACKLOG,
           ERROR_GROUP.UNRESOLVED
         )
@@ -502,7 +502,7 @@ describe("Get notification icon by action from error group", () => {
   describe("Fail cases", () => {
     test("Doesn't return 'add' or 'unresolve' icon from 'Unresolved' group", () => {
       expect(
-        getNotificationIconByErrorShift(
+        getNotificationIconTypeByErrorShift(
           ERROR_GROUP.UNRESOLVED,
           ERROR_GROUP.RESOLVED
         )
@@ -511,7 +511,7 @@ describe("Get notification icon by action from error group", () => {
 
     test("Doesn't return 'add' or 'resolve' icon from 'Resolved' group", () => {
       expect(
-        getNotificationIconByErrorShift(
+        getNotificationIconTypeByErrorShift(
           ERROR_GROUP.RESOLVED,
           ERROR_GROUP.UNRESOLVED
         )
@@ -520,7 +520,7 @@ describe("Get notification icon by action from error group", () => {
 
     test("Doesn't return 'resolve' or 'unresolve' icon from 'Resolved' group", () => {
       expect(
-        getNotificationIconByErrorShift(
+        getNotificationIconTypeByErrorShift(
           ERROR_GROUP.BACKLOG,
           ERROR_GROUP.UNRESOLVED
         )

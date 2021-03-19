@@ -41,7 +41,7 @@ export const undoAction = ({ actionType = ACTION_TYPE.UNDO } = {}) => {
 };
 
 /**
- * Deallocate actionHistory entirely to revert all actions.
+ * Deallocates actionHistory entirely to revert all actions.
  */
 export const undoAllActions = () => {
   for (var i = actionHistory.length; i > 0; i--) {

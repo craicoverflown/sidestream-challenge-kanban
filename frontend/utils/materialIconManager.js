@@ -5,7 +5,7 @@ import { ICON_TYPE, ICON_PATH, COLOUR } from "../constants/enums";
  *
  * @param iconType Routes the iconType to its proprietary iconPath.
  */
-export const getMaterialIconByType = iconType =>
+export const getMaterialIconByIconType = iconType =>
   ICON_PATH[Object.keys(ICON_TYPE).find(key => ICON_TYPE[key] === iconType)];
 
 /**
