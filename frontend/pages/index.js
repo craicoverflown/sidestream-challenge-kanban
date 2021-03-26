@@ -62,8 +62,16 @@ export const componentDataLayer = {
       if (newState) {
         try {
           this.errorCount = await this.$axios.$post(
-            "http://localhost:8000/count_resolved_error_code_occurrences",
-            this.resolved.data
+            `${window.location.href.replace(
+              3000,
+              8000
+            )}count_resolved_error_code_occurrences`,
+            this.resolved.data,
+            {
+              headers: {
+                "Content-Type": "application/json"
+              }
+            }
           );
         } catch (error) {
           console.log(

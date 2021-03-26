@@ -17,9 +17,7 @@ from .models.error import Error
 ERROR_CODES = [error_code for error_code in range(50)]
 app = FastAPI()
 
-origins = [
-    "http://localhost:3000",
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
